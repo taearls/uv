@@ -369,15 +369,15 @@ impl<'a> BaseClientBuilder<'a> {
         let ssl_cert_file_exists = env::var_os(EnvVars::SSL_CERT_FILE)
             .filter(|v| !v.is_empty())
             .is_some_and(|path| {
-            let path_exists = Path::new(&path).exists();
-            if !path_exists {
-                warn_user_once!(
-                    "Ignoring invalid `SSL_CERT_FILE`. File does not exist: {}.",
-                    path.simplified_display().cyan()
-                );
-            }
-            path_exists
-        });
+                let path_exists = Path::new(&path).exists();
+                if !path_exists {
+                    warn_user_once!(
+                        "Ignoring invalid `SSL_CERT_FILE`. File does not exist: {}.",
+                        path.simplified_display().cyan()
+                    );
+                }
+                path_exists
+            });
 
         // Checks for the presence of `SSL_CERT_DIR`.
         // Certificate loading support is delegated to `rustls-native-certs`.
